@@ -33,9 +33,9 @@ $.post( "/check", {id:mobile}, function(data) {
   } else if (data.message == "bingo"){
      cur_time=new Date(data.time);
      cur_time=cur_time.toString();
-     $("#jp_time").html("<h2>"+cur_time+"</h2>");
-     $("#jp_jp").html("<h2>"+data.jiaping+"</h2>");
-     $("#jp_mobile").html("<h2>"+mobile+"</h2>");
+     $("#jp_time").html(""+cur_time);
+     $("#jp_jp").html(""+data.jiaping);
+     $("#jp_mobile").html(""+mobile);
   }
 });
 }
@@ -88,19 +88,12 @@ return true;
 
 var mobile="";
 $(document).ready(function() {
-/*
-$("#postform").click(function(event) {
-  //$(this).width($(this).width() + 20); 
-  //$(this).height($(this).height() + 20); 
-  $(this).fadeOut(100);
-  $(this).fadeIn(100);
-  $("#lookform").submit();
+
+$.getJSON('tip.json',function(data) {
+  tip = data.tip;
+  $("#tip").html(tip);
 });
-$("#postform").hover(function() {
-  $(this).fadeOut(100);
-  $(this).fadeIn(100);
-});
-*/
+
 
 $.getJSON('qiz.json',function(data){
   questions = data.questions;
@@ -110,7 +103,7 @@ $.getJSON('qiz.json',function(data){
   var j = i+1;
   qname = "q"+j;
   var qiz = "";
-  qiz = "<fieldset data-role='controlgroup'><legend>"+questions[i].q+"</legend>" + 
+  qiz = "<fieldset data-role='controlgroup'><legend><bold>"+questions[i].q+"</bold></legend>" + 
 	"<label for='"+qname+"a'>" + questions[i].a + "</label>" +
         "<input type='radio' name='" + qname + "' id='" +qname +"a' value='" + questions[i].a + "'>" +
 	"<label for='"+qname+"b'>" + questions[i].b + "</label>" +
@@ -198,7 +191,7 @@ $("#join").click(function(event) {
   <div data-role="main" class="ui-content">
     <form id="q1">
     </form>
-    <a href="#lottery" class="ui-btn" id="lot"  onclick="return checklot();">进入抽奖页面</a>
+    <a href="#lottery" class="ui-btn" id="lot"  onclick="return checklot();">提交答案，开始抽奖</a>
   </div>
 </div> 
 
@@ -214,7 +207,7 @@ $("#join").click(function(event) {
 	<input type="text" name="id" placeholder="请输入手机号码" id="hid"> 
   	</form>-->
 
-	<div class="ui-grid-a"> <div class="ui-block-a" style="width: 30%;" id="postform">
+	<div class="ui-grid-a"> <div class="ui-block-a" style="width: 23%;" id="postform">
         <img src="./2.png" style="width: 100%;" /> </div></div>
 
 	<div class="ui-grid-a"> <div class="ui-block-a" style="width: 100%; ">
@@ -222,6 +215,11 @@ $("#join").click(function(event) {
 
 
   </div>
+
+  <div data-role="footer">
+    <h1>谢谢参与！</h1>
+  </div>
+
 </div> 
 
 <div data-role="page" id="done">
@@ -244,17 +242,16 @@ $("#join").click(function(event) {
   <div data-role="main" class="ui-content" id="info">
   <p id="sorry"></p>
   <div id="information">
-  <p><h2>日期：</h2></p>
-  <p><span id="jp_time"></span></p>
-  <p><h2>奖品：</h2></p>
-  <p><span id="jp_jp"></span></p>
-  <p><h2>手机号：</h2></p>
-  <p><span id="jp_mobile"></span></p>
+  <p>日期：</p>
+  <p id="jp_time"></p>
+  <p>奖品：</p>
+  <p id="jp_jp"></p>
+  <p>手机号：</p>
+  <p id="jp_mobile"></p>
   </div>
   <a href="javascript:history.back()" class="ui-btn">返回</a>
 
-
-  <h2>您可在活动结束后，凭此领奖页面，至指定地点领取奖品</h2>
+  <h2 id="tip"></h2>
   </div>
 
 </div> 
