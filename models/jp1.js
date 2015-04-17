@@ -16,4 +16,4 @@ jp1Schema.static.chouJiang = function(cb) {
   this.findOne({ amount: {$gt: 0} } );
 }
 
-module.exports = mongoose.model('JP', jp1Schema)
+module.exports = mongoose.model('JP2', jp1Schema)

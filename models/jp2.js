@@ -13,4 +13,4 @@ jp2Schema.statics.getJP = function (j, cb) {
   this.find({jp:j}, cb);
 }
 
-module.exports = mongoose.model('JP', jp2Schema)
+module.exports = mongoose.model('JP2', jp2Schema)
